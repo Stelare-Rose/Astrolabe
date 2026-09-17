@@ -1,0 +1,57 @@
+:root {
+  /* Accents — same in both flavors */
+  --strawberry: #cf8282;
+  --orange:     #d4a266;
+  --lemon:      #e3cd7f;
+  --leaf:       #9ccc96;
+  --mint:       #99cfac;
+  --sky:        #90cdde;
+  --blueberry:  #9bb0de;
+  --grape:      #9b98d6;
+  --plum:       #aa99d1;
+  --lavender:   #cca3d6;
+  --lilac:      #dbb4d3;
+  --pink:       #edb7ca;
+}
+
+/* Milk Tea (light) */
+[data-flavor="milktea"] {
+  --foam:      #f8f4e9;
+  --cream:     #f0e8da;
+  --base:      #e6d9c8;
+  --tea:       #decec1;
+  --subtext2:  #6b564b;
+  --subtext1:  #4f453f;
+  --text:      #403732;
+  --highlight: #383029;
+
+  --bg:       var(--foam);
+  --bg-alt:   var(--cream);
+  --surface:  var(--base);
+  --border:   var(--tea);
+  --ink:      var(--highlight);
+  --ink-soft: var(--text);
+  --ink-dim:  var(--subtext1);
+  --accent:   var(--strawberry);
+}
+
+/* Tiramisu (dark) */
+[data-flavor="tiramisu"] {
+  --foam:      #6b564b;
+  --cream:     #4f453f;
+  --base:      #403732;
+  --tea:       #383029;
+  --subtext2:  #decec1;
+  --subtext1:  #e6d9c8;
+  --text:      #f0e8da;
+  --highlight: #f8f4e9;
+
+  --bg:       var(--tea);
+  --bg-alt:   var(--base);
+  --surface:  var(--cream);
+  --border:   var(--foam);
+  --ink:      var(--highlight);
+  --ink-soft: var(--text);
+  --ink-dim:  var(--subtext1);
+  --accent:   var(--pink);
+}
