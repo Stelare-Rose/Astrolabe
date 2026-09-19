@@ -11,6 +11,7 @@ import { wikilinks } from './src/plugins/satteri-wikilinks.mjs';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://astrolabe.starrytea.cc',
   integrations: [mdx(), svelte()],
   markdown: {
     processor: satteri({
