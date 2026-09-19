@@ -8,7 +8,9 @@ const sections = [
 ---
 <nav class="topbar">
   <section class="topbar-right">
-    <img src="/icons/icon.svg" alt="Site logo" width="48" height="48" />
+    <a href="#about">
+      <img src="/icons/icon.svg" alt="Site logo" width="48" height="48" />
+    </a>
   </section>
   <section class="topbar-left">
     {sections.map(s => (
@@ -48,10 +50,6 @@ button.addEventListener('click', () => {
   justify-content: space-between;
   gap: 1.5rem;
   overflow-x: auto;
-  scrollbar-width: none;
-}
-.topbar::-webkit-scrollbar {
-  display: none; 
 }
 .topbar-right {
   align-items: center;
