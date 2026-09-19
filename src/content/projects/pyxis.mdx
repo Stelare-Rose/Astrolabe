@@ -1,0 +1,17 @@
+---
+title: "Pyxis"
+tags: ["Prototype", "Ongoing"]
+year: "2025"
+tagline: "a todo list was a good first project, they said"
+stack: "Go, Tauri, Nuxt, Sqlite"
+github: "https://github.com/Stelare-Rose/Pyxis"
+---
+import AsciinemaDemo from '../../components/AsciinemaDemo.svelte';
+
+Frustrated by how slow some apps are when I want to access them with bad internet, I built Pyxis, because "todo list" was a common project for first-timers, right?
+
+Pyxis relies on flat text files as the source of truth, reducing sync conflicts by only deriving certain properties when necessary. Pyxis currently indexes in 47ms with 290 files, because it's an early prototype architecture for what [[proj!Horologium]] optimized later.
+
+<AsciinemaDemo client:load src="/recordings/pyxis.cast" title="Pyxis Service demo" autoplay="true" loop="true" rows="20"/>
+
+_Pyxis service logs, indexing 290 files (cached)_

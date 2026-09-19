@@ -1,0 +1,152 @@
+---
+import Pill from './Pill.astro';
+
+interface Props {
+  title: string;
+  tags: string[];
+  year: string;
+  tagline: string;
+  stack?: string;
+  github?: string;
+  forgejo?: string;
+}
+
+const { title, tags, year, tagline, stack, github, forgejo } = Astro.props;
+
+const statusColors: Record<string, string> = {
+  Prototype: 'var(--strawberry)',
+  MVP: 'var(--orange)',
+  Stable: 'var(--leaf)',
+  Ongoing: 'var(--blueberry)',
+  Study: 'var(--lavender)',
+};
+---
+
+<article class="project-card" id={title}>
+  <header class="project-header">
+    <h3 class="project-title">
+      {title} <span class="project-year">({year})</span>
+
+    </h3>
+
+    <div class="project-tags">
+      {tags.map((tag) => (
+      <Pill text={tag} color={statusColors[tag] ?? 'var(--subtext)'} />
+      ))}
+    </div>
+  </header>
+
+  <p class="project-tagline">{tagline}</p>
+
+  <div class="project-body">
+    <slot />
+  </div>
+  <section class="project-footer">
+    {(github || forgejo) && (
+    <div class="project-links">
+      {github && (
+      <a href={github} class="project-link" target="_blank" rel="noopener noreferrer">
+        <img src="/icons/github.svg" alt="Github" width="18" height="18" />
+      </a>
+      )}
+      {forgejo && (
+      <a href={forgejo} class="project-link" target="_blank" rel="noopener noreferrer">
+        <img src="/icons/forgejo.svg" alt="Forgejo" width="18" height="18" />
+      </a>
+      )}
+    </div>
+    )}
+    {stack && (
+    <p class="project-stack">
+      <span class="stack-label">Stack:</span> {stack}
+    </p>
+    )}
+  </section>
+
+</article>
+
+<style>
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--bg-alt);
+    min-height: 100%;
+    box-sizing: border-box;
+  }
+
+  .project-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+  }
+
+  .project-title {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .project-year {
+    font-weight: 400;
+    color: var(--subtext);
+    font-size: 0.9em;
+  }
+
+  .project-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .project-tagline {
+    margin: 0;
+    font-style: italic;
+    color: var(--ink-dim);
+    font-size: 0.95rem;
+  }
+
+  .project-body {
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  .project-stack {
+    margin: 0.25rem 0 0;
+    font-size: 0.85rem;
+    color: var(--subtext);
+  }
+
+  .stack-label {
+    font-weight: 600;
+    color: var(--ink-dim);
+  }
+
+  .project-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .project-footer {
+    margin-top: auto;
+  }
+
+  .project-link {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent, var(--ink));
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+  }
+
+  .project-link:hover {
+    border-color: currentColor;
+  }
+
+
+</style>

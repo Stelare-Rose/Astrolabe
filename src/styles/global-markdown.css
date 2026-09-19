@@ -1,0 +1,35 @@
+blockquote {
+  border-left: 3px solid var(--border);
+  padding-left: 1rem;
+  margin: 1rem 0;
+  font-style: italic;
+  color: var(--subtext);
+}
+
+pre.astro-code {
+  font-family: 'Monaspace Neon', ui-monospace, 'SF Mono', Consolas, monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  overflow-x: auto;
+  background-color: var(--bg-alt) !important; /* Shiki sets its own bg inline; override if needed */
+}
+
+pre.astro-code span {
+  color: var(--subtext) !important;
+}
+pre.astro-code code {
+  font-family: inherit;
+  font-variant-ligatures: contextual; /* Monaspace's texture healing works best with ligatures on */
+}
+
+/* Scrollbar treatment, reusing your earlier setup */
+pre.astro-code::-webkit-scrollbar {
+  height: 8px;
+}
+pre.astro-code::-webkit-scrollbar-thumb {
+  background-color: var(--border);
+  border-radius: 999px;
+}

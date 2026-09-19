@@ -1,0 +1,53 @@
+---
+// components/Footer.astro
+---
+
+<footer class="site-footer">
+  <p>
+    <a href="https://git.starrytea.cc/Stelare-Rose/Astrolabe">Astrolabe</a>,
+    built with Astro &amp; Svelte
+  </p>
+  <p>
+    ... and
+    <span class="mark mark-light" aria-hidden="true"> ₍^. .^₎⟆</span>
+    <span class="mark mark-dark" aria-hidden="true"> ⋆˙⟡</span>
+  </p>
+  <p>
+    by <a href="https://git.starrytea.cc/Stelare-Rose">Stelare-Rose</a>
+  </p>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: 3rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 0.85em;
+    color: var(--subtext);
+  }
+
+  .site-footer p {
+    margin: 0.2rem 0;
+  }
+
+  .site-footer a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  .site-footer a:hover {
+    color: var(--ink);
+  }
+
+  .mark-dark { display: none; }
+
+  :global([data-flavor='tiramisu']) .mark-light { display: none; }
+  :global([data-flavor='tiramisu']) .mark-dark { display: inline; }
+
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-flavor])) .mark-light { display: none; }
+    :global(:root:not([data-flavor])) .mark-dark { display: inline; }
+  }
+</style>

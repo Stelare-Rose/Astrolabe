@@ -1,0 +1,37 @@
+---
+import SkillChip from './SkillChip.svelte';
+import { skills } from './content/skills';
+---
+
+<section class="skills">
+  {Object.entries(skills).map(([group, items]) => (
+    <div class="skill-group">
+      <h3 class="skill-group-title">{group}</h3>
+      <ul class="skill-list">
+        {items.map((s) => (
+          <SkillChip client:visible name={s.name} used={s.used} />
+        ))}
+      </ul>
+    </div>
+  ))}
+</section>
+
+<style>
+  .skill-group + .skill-group {
+    margin-top: 1rem;
+  }
+
+  .skill-group-title {
+    margin: 0 0 0.4rem;
+    font-size: 1rem;
+  }
+
+  .skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+</style>

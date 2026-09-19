@@ -1,0 +1,274 @@
+---
+import { getCollection, render } from 'astro:content';
+import Pill from './Pill.astro';
+import ProjectCard from './ProjectCard.astro';
+
+const projects = await getCollection('projects');
+
+const sorted = [...projects].sort(
+  (a, b) => (a.data.order ?? 0) - (b.data.order ?? 0)
+);
+
+const rendered = await Promise.all(
+  sorted.map(async (entry) => ({
+    ...entry,
+    Content: (await render(entry)).Content,
+  }))
+);
+
+const statusColors: Record<string, string> = {
+  Prototype: 'var(--strawberry)',
+  MVP: 'var(--orange)',
+  Stable: 'var(--leaf)',
+  Ongoing: 'var(--blueberry)',
+  Study: 'var(--lavender)',
+};
+---
+
+<div class="projects-master-detail">
+  <nav class="projects-list" aria-label="Projects">
+    <ul>
+      {rendered.map(({ id, data }, i) => (
+      <li>
+        <button
+          type="button"
+          class="project-list-item"
+          data-project-id={id}
+          aria-current={i === 0 ? 'true' : 'false'}
+        >
+          <span class="project-list-title">{data.title}</span>
+          <span class="project-list-tags">
+            {data.tags.map((tag: string) => (
+            <Pill text={tag} color={statusColors[tag] ?? 'var(--subtext)'} />
+            ))}
+          </span>
+        </button>
+      </li>
+      ))}
+    </ul>
+  </nav>
+
+  <div class="project-detail">
+    {rendered.map(({ id, data, Content }, i) => (
+    <div
+      class="project-detail-panel"
+      data-project-panel={id}
+      hidden={i !== 0}
+    >
+      <ProjectCard
+        title={data.title}
+        tags={data.tags}
+        year={data.year}
+        tagline={data.tagline}
+        stack={data.stack}
+        github={data.github}
+        forgejo={data.forgejo}
+      >
+        <Content />
+      </ProjectCard>
+    </div>
+    ))}
+  </div>
+</div>
+
+<style>
+.projects-master-detail {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+  height: min(60vh, 720px);
+}
+
+@media (max-width: 720px) {
+  .projects-master-detail {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+}
+
+.projects-list {
+  height: 100%;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+  scrollbar-width: 0;
+}
+
+.projects-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+@media (max-width: 720px) {
+  .projects-list {
+    height: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.5rem;
+  }
+
+  .projects-list ul {
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
+  .project-list-item {
+    width: auto;
+    min-width: 180px;
+    flex: 0 0 auto;
+  }
+}
+
+.project-list-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border-radius: 0.5rem;
+  background: var(--bg-alt);
+  color: var(--ink-soft);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.project-list-item:hover {
+  background: var(--surface);
+}
+
+.project-list-item[aria-current='true'] {
+  border-color: var(--accent, var(--ink));
+  background: var(--surface);
+}
+
+.project-list-title {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.project-list-tags {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.project-detail {
+  height: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  overflow-y: auto;
+}
+
+@media (max-width: 720px) {
+  .project-detail {
+    height: auto;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+}
+
+.project-detail-panel {
+  transition: opacity 0.2s ease;
+  opacity: 1;
+  height: 100%;
+}
+
+.project-detail-panel.is-fading {
+  opacity: 0;
+}
+
+/* Wikilink buttons rendered inside project markdown/MDX content.
+:global is needed because the buttons are emitted by the markdown
+pipeline, not by this component, so they lack Astro's scope attribute. */
+:global(.wikilink) {
+  all: unset;
+  cursor: pointer;
+  color: var(--accent, currentColor);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+:global(.wikilink:hover) {
+  opacity: 0.8;
+}
+
+:global(.wikilink:focus-visible) {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+  border-radius: 0.2em;
+}
+</style>
+
+<script>
+const FADE_MS = 200;
+
+function showProject(id: string) {
+  const root = document.querySelector<HTMLElement>('.projects-master-detail');
+  root.querySelector('.project-detail')?.scrollIntoView({
+    behavior: 'smooth',
+    block: 'nearest',
+  });
+  if (!root) return;
+
+  const buttons = Array.from(
+    root.querySelectorAll<HTMLButtonElement>('[data-project-id]')
+  );
+  const panels = Array.from(
+    root.querySelectorAll<HTMLElement>('[data-project-panel]')
+  );
+
+  const currentPanel = panels.find((p) => !p.hidden);
+  const nextPanel = panels.find((p) => p.dataset.projectPanel === id);
+
+  if (!nextPanel || nextPanel === currentPanel) return;
+
+  buttons.forEach((b) =>
+    b.setAttribute(
+      'aria-current',
+      b.dataset.projectId === id ? 'true' : 'false'
+    )
+  );
+
+  if (currentPanel) {
+    currentPanel.classList.add('is-fading');
+    window.setTimeout(() => {
+      currentPanel.hidden = true;
+      currentPanel.classList.remove('is-fading');
+
+      nextPanel.hidden = false;
+      nextPanel.classList.add('is-fading');
+      nextPanel.offsetHeight;
+      nextPanel.classList.remove('is-fading');
+    }, FADE_MS);
+  } else {
+    nextPanel.hidden = false;
+  }
+}
+
+document.addEventListener('click', (e) => {
+  const target = e.target as HTMLElement;
+
+  const listBtn = target.closest<HTMLElement>('[data-project-id]');
+  if (listBtn) {
+    showProject(listBtn.dataset.projectId!);
+    return;
+  }
+
+  const wikilink = target.closest<HTMLElement>('[data-project-link]');
+  if (wikilink) {
+    showProject(wikilink.dataset.projectLink!);
+  }
+});
+
+window.addEventListener('show-project', (e) => {
+  showProject((e as CustomEvent<string>).detail);
+});
+</script>

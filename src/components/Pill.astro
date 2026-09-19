@@ -1,0 +1,38 @@
+---
+// Pill.astro
+interface Props {
+  text: string;
+  color?: string;
+  class?: string;
+}
+
+const { text, color, class: className } = Astro.props;
+---
+
+<div data-flavor="milktea">
+  <span
+    class:list={["pill", className]}
+    style={color ? `--pill-color: ${color}` : undefined}
+  >
+    {text}
+  </span>
+</div>
+<style>
+  .pill {
+    --pill-color: var(--accent);
+
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25em 0.75em;
+    border-radius: 999px;
+    font-size: 0.85em;
+    line-height: 1.4;
+    font-weight: 500;
+    white-space: nowrap;
+    font-style: normal;
+
+    color: var(--pill-color);
+    background-color: color-mix(in srgb, var(--pill-color) 15%, transparent);
+    border: 1px dashed var(--pill-color);
+  }
+</style>

@@ -1,20 +1,59 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Topbar from '../components/Topbar.astro';
+import Pill from '../components/Pill.astro';
+import ProjectsList from '../components/ProjectsList.astro';
 import '../styles/global.css';
 import 'asciinema-player/dist/bundle/asciinema-player.css';
+
+import { Content as AboutText } from '../content/about.md';
+import { Content as SkillsText } from '../content/skills.mdx';
+import { Content as ContactText } from '../content/contact.md';
 ---
 <Layout title="Home">
-  <section id="intro" class="hero">
+  <section id="about" class="hero">
     <section class="hero-text-section">
-      <h1>Stelare-Rose</h1>
-      <p class="subtitle">Hello, I'm Stelare (pseudonym, obviously), a software developer, occasional competitive programmer, flautist, and local stars enjoyer. I'm currently an undergraduate studying computer science. I currently sit on a 3.90 GPA.
-      </p>
-      <a href="#projects" class="cta">See my projects ↓</a>
+      <h1>&gt; whoami</h1>
+      <AboutText />
     </section>
     <section class="hero-asciinema-starlit">
       <div id="starlit-demo"></div>
     </section>
+  </section>
+  <section id="projects" class="projects">
+    <h1>Projects</h1>
+    <blockquote>
+      <ul class="projects-legend">
+        <li>
+          <Pill text="Prototype" color="var(--strawberry)"/>
+          <span>Working version exists, unstable</span>
+        </li>
+        <li>
+          <Pill text="MVP" color="var(--orange)" />
+          <span>Working version Exists, relatively stable, feature incomplete</span>
+        </li>
+        <li>
+          <Pill text="Stable" color="var(--leaf)" />
+          <span>Working version exists, nearly feature-complete</span>
+        </li>
+        <li>
+          <Pill text="Ongoing" color="var(--blueberry)" />
+          <span>Still being worked on.</span>
+        </li>
+        <li>
+          <Pill text="Study" color="var(--lavender)" />
+          <span>Mainly for testing, studying, or sketching. May be unmaintained or immature</span>
+        </li>
+      </ul>
+    </blockquote>
+    <ProjectsList />
+  </section>
+  <section id="skills" class="skills">
+    <h1>Skills</h1>
+    <SkillsText />
+  </section>
+  <section id="contact" class="contact">
+    <ContactText />
   </section>
 </Layout>
 
@@ -73,4 +112,33 @@ AsciinemaPlayer.create('/recordings/starlit.cast', document.getElementById('star
 #starlit-demo {
   width: 100%;
 }
+
+.projects {
+  padding: 2rem;
+}
+
+.projects-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0;
+  margin: 0;
+}
+
+.projects-legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  color: var(--subtext);
+}
+
+.skills {
+  padding: 2rem;
+}
+
+.contact {
+  padding: 2rem;
+}
+
 </style>

@@ -1,0 +1,24 @@
+---
+title: "Eridanus"
+tags: ["Stable", "Ongoing"]
+year: "2026"
+tagline: "i'm well aware frontmatter exists"
+stack: "Rust"
+github: "https://github.com/Stelare-Rose/Eridanus"
+forgejo: "https://git.starrytea.cc/Constellation-Project/Eridanus"
+---
+Pyxis lacked a file format. I wrote a file format. Specifically, I wanted a one-right-way format, so I would have the same expectations in every language (unlike some TOMLs I can mention). Also, human readable for debugging. Eridanus is currently the format being used for [[proj!Horologium]], and [[proj!Pyxis]] is planned to be moved over as well.
+
+```
+schema = horologium:record
+version = v1.0.0
+===content===
+event.enum = "active"
+event.name = "Astrolabe"
+event.project = *proj_-USvSrOpjCY:"Astrolabe"
+event.tags = *[tag_-ME9eqUBzQL:"Personal"]
+id = "01a0b597-8ab0-7030-bf54-ac6b5eebd078"
+start = &2026-09-18T17:36:42.672480186+00:00
+```
+
+_Example file, taken from Horologium. This file actually is me tracking myself building this website!_

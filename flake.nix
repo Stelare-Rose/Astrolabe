@@ -19,6 +19,7 @@
           bun
           svelte-language-server
           astro-language-server
+          emmet-language-server
         ];
         shellHook = "tmux -L Astrolabe new-session -A -s Astrolabe";
       };
