@@ -31,6 +31,10 @@
 
     options.theme = 'starrytea',
     player = create(src, mountEl, options);
+
+    requestAnimationFrame(() => {
+      window.dispatchEvent(new Event('resize'));
+    });
   });
 
   onDestroy(() => {
