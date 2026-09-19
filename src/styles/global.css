@@ -1,4 +1,12 @@
 :root {
+  body {
+    color: var(--ink);
+    background: var(--bg-alt);
+    font-family: "Nunito", sans-serif;
+  }
+  *, *::before, *::after {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  }
   /* Accents — same in both flavors */
   --strawberry: #cf8282;
   --orange:     #d4a266;

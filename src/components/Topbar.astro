@@ -1,0 +1,71 @@
+---
+const sections = [
+  { id: 'about', label: 'About' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'contact', label: 'Contact' },
+];
+---
+<nav class="topbar">
+  <section class="topbar-right">
+    <img src="/icons/icon.svg" alt="Site logo" width="48" height="48" />
+  </section>
+  <section class="topbar-left">
+    {sections.map(s => (
+    <a href={`#${s.id}`}>{s.label}</a>
+    ))}
+    <button id="flavor-toggle" aria-label="Toggle flavor"></button>
+  </section>
+</nav>
+
+<script>
+const button = document.getElementById('flavor-toggle');
+const root = document.documentElement;
+
+function updateIcon() {
+  button.textContent = root.getAttribute('data-flavor') === 'milktea' ? '☀︎' : '⏾';
+}
+
+updateIcon();
+
+button.addEventListener('click', () => {
+  const next = root.getAttribute('data-flavor') === 'milktea' ? 'tiramisu' : 'milktea';
+  root.setAttribute('data-flavor', next);
+  localStorage.setItem('flavor', next);
+  updateIcon();
+});
+</script>
+
+<style>
+.topbar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  z-index: 50;
+  padding: 0.5rem 1rem;
+  background: var(--bg);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  justify-content: space-between;
+}
+.topbar-left a {
+  text-decoration: none;
+  color: inherit;
+  scroll-behavior: smooth;
+}
+.topbar-left {
+  align-items: center;
+  display: flex;
+  gap: 1.5rem;
+}
+#flavor-toggle {
+  background: none;
+  color: var(--ink);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+</style>
