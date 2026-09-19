@@ -1,22 +1,65 @@
 ---
+import Layout from '../layouts/Layout.astro';
 import Topbar from '../components/Topbar.astro';
 import '../styles/global.css';
+import 'asciinema-player/dist/bundle/asciinema-player.css';
 ---
+<Layout title="Home">
+  <section id="intro" class="hero">
+    <section class="hero-text-section">
+      <h1>Stelare-Rose</h1>
+      <p class="subtitle">Hello, I'm Stelare (pseudonym, obviously), a software developer, occasional competitive programmer, flautist, and local stars enjoyer. I'm currently an undergraduate studying computer science. I currently sit on a 3.90 GPA.
+      </p>
+      <a href="#projects" class="cta">See my projects ↓</a>
+    </section>
+    <section class="hero-asciinema-starlit">
+      <div id="starlit-demo"></div>
+    </section>
+  </section>
+</Layout>
 
-<html lang="en" data-flavor="milktea">
-	<head>
-		<meta charset="utf-8" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astrolabe</title>
-	</head>
-	<body>
-    <Topbar></Topbar>
-    <h1>content!</h1>
-	</body>
-</html>
+<script>
+import * as AsciinemaPlayer from 'asciinema-player';
+AsciinemaPlayer.create('/recordings/starlit.cast', document.getElementById('starlit-demo'), {
+  autoplay: true,
+  loop: true,
+  controls: false,
+  theme: 'starrytea',
+});
+</script>
+<style>
+.hero {
+  min-height: 50vh;
+  display: flex;
+  padding: 2rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8rem;
+}
+.hero-text-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 720px;
+}
+.hero-text-section h1 {
+  font-size: clamp(1.5rem, 2vw, 3rem);
+  margin: 0;
+}
+.hero-text-section .subtitle {
+  color: var(--ink-dim);
+  text-align: justify;
+  font-size: 1.25rem;
+}
+.hero-asciinema-starlit {
+  min-width: 0;
+  flex: 1;
+  align-self: stretch;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 2px solid var(--border);
+}
+#starlit-demo {
+  width: 100%;
+}
+</style>

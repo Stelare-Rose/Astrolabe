@@ -1,12 +1,34 @@
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading); 
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+body {
+  color: var(--ink);
+  background: var(--bg-alt);
+  font-family: var(--font-text);
+}
+*, *::before, *::after {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+.ap-player.asciinema-player-theme-starrytea {
+  --term-color-foreground: var(--ink);
+  --term-color-background: var(--bg);
+
+  --term-color-0: var(--surface);
+  --term-color-1: var(--strawberry);
+  --term-color-2: var(--leaf);
+  --term-color-3: var(--lemon);
+  --term-color-4: var(--blueberry);
+  --term-color-5: var(--grape);
+  --term-color-6: var(--sky);
+  --term-color-7: var(--ink);
+}
 :root {
-  body {
-    color: var(--ink);
-    background: var(--bg-alt);
-    font-family: "Nunito", sans-serif;
-  }
-  *, *::before, *::after {
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-  }
+  /* Fonts */
+  --font-heading: 'Fredoka', sans-serif;
+  --font-text: 'Nunito', sans-serif;
+
   /* Accents — same in both flavors */
   --strawberry: #cf8282;
   --orange:     #d4a266;

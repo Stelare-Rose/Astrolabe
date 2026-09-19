@@ -46,6 +46,17 @@ button.addEventListener('click', () => {
   background: var(--bg);
   box-shadow: 0 1px 4px rgba(0,0,0,0.1);
   justify-content: space-between;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.topbar::-webkit-scrollbar {
+  display: none; 
+}
+.topbar-right {
+  align-items: center;
+  display: flex;
+  gap: 1.5rem;
 }
 .topbar-left a {
   text-decoration: none;
