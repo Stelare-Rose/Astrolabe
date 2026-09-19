@@ -34,13 +34,15 @@ AsciinemaPlayer.create('/recordings/starlit.cast', document.getElementById('star
   padding: 2rem;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 8rem;
+  column-gap: 8rem;
+  row-gap: 2rem;
 }
 .hero-text-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
   max-width: 720px;
+  order: 1;
 }
 .hero-text-section h1 {
   font-size: clamp(1.5rem, 2vw, 3rem);
@@ -52,12 +54,21 @@ AsciinemaPlayer.create('/recordings/starlit.cast', document.getElementById('star
   font-size: 1.25rem;
 }
 .hero-asciinema-starlit {
+  order: 2;
   min-width: 0;
   flex: 1;
   align-self: stretch;
   border-radius: 16px;
   overflow: hidden;
   border: 2px solid var(--border);
+}
+@media (max-width: 931px) {
+  .hero-text-section {
+    order: 2; /* stacked: hero text first */
+  }
+  .hero-asciinema-starlit {
+    order: 1; /* stacked: terminal second */
+  }
 }
 #starlit-demo {
   width: 100%;
