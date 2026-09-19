@@ -12,7 +12,7 @@ import AsciinemaDemo from '../../components/AsciinemaDemo.svelte';
 Various time-trackers kept dying on me when my internet inevitably dies. A local-first, CLI-based time tracker leveraging [[proj!Pyxis]]' split design and inspiration from event-sourcing to build a sync-resistant time tracker. Index times are 20ms cold / 3ms - 500µs with an existing cache at 130 files. This is due to fingerprinting and bucketing reducing most of the work needed when a cache is already partially built.
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 1rem; align-items: start;">
-  <AsciinemaDemo rows="20" client:load src="/recordings/horologium-crescent.cast" title="Horologium (Crescent) demo" autoplay="true" />
-  <AsciinemaDemo rows="20" client:load src="/recordings/horologium-selene.cast" title="Horologium (Selene) demo" autoplay="true" />
+  <AsciinemaDemo rows="20" client:visible src="/recordings/horologium-crescent.cast" title="Horologium (Crescent) demo" autoplay="true" />
+  <AsciinemaDemo rows="20" client:visible src="/recordings/horologium-selene.cast" title="Horologium (Selene) demo" autoplay="true" />
 </div>
 _Demo recorded on two devices, only connected via syncthing. Recording started at (roughly) the same time._

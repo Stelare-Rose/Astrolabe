@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "MonaspiceNe Nerd Font Mono";
+  src: url("/fonts/MonaspiceNeNerdFontMono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
 a {
   color: var(--accent);
 }
@@ -53,6 +60,7 @@ html {
   --term-color-6: var(--sky);
   --term-color-7: var(--ink);
 }
+
 :root {
   /* Fonts */
   --font-heading: 'Fredoka', sans-serif;

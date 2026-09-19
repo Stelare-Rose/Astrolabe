@@ -12,8 +12,8 @@ import AsciinemaDemo from '../../components/AsciinemaDemo.svelte';
 Unifying all my devices, Atelier-Iris is a personal NixOS configuration utilizing flakes to allow me to configure all 3 of my devices (Laptop, PC, and [[proj!Homelab]]) alongside a VM configuration. This has been amazing for reproducible setups, and as such my development environment on my PC, Laptop, or even if I'm SSHing into my Homelab, all feel nearly the same.
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 1rem; align-items: start;">
-  <AsciinemaDemo client:load src="/recordings/iris-crescent.cast" title="Iris (Crescent) demo" autoplay="true" />
-  <AsciinemaDemo client:load src="/recordings/iris-selene.cast" title="Iris (Selene) demo" autoplay="true" />
+  <AsciinemaDemo client:visible src="/recordings/iris-crescent.cast" title="Iris (Crescent) demo" autoplay="true" />
+  <AsciinemaDemo client:visible src="/recordings/iris-selene.cast" title="Iris (Selene) demo" autoplay="true" />
 </div>
 
 _demo recorded with asciinema on two different devices. (Hence why the monitor sizes differ)._
