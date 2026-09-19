@@ -14,7 +14,6 @@
   export let fontSize: string | undefined = undefined;
   export let maxWidth: string | undefined = undefined;
 
-  // MDX passes attributes like autoplay="true" as strings
   const truthy = (v: boolean | string) => v === true || v === 'true';
 
   let mountEl: HTMLElement;
@@ -57,8 +56,6 @@
       player = create(src, mountEl, options);
     }
 
-    // Wait until the element is visible with a real width. A player created
-    // inside a hidden panel (display: none) measures 0 and renders wrong.
     const io = new IntersectionObserver((entries) => {
       if (entries.some((e) => e.isIntersecting && e.boundingClientRect.width > 0)) {
         io.disconnect();
@@ -95,8 +92,12 @@
   }
   .player {
     width: 100%;
-    min-width: 0; /* lets it shrink inside grid/flex parents */
-    overflow-x: auto;
+    min-width: 0;
+    border: 2px dashed var(--border);
+    box-sizing: border-box;
+    border-radius: 1rem;
+    overflow: hidden;
+    transform: translateZ(0);
   }
   .hint {
     margin: 0.5rem 0 0;
