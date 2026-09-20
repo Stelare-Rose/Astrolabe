@@ -8,6 +8,7 @@ import 'asciinema-player/dist/bundle/asciinema-player.css';
 import AsciinemaDemo from '../components/AsciinemaDemo.svelte';
 
 import { Content as AboutText } from '../content/about.md';
+import { Content as StarlitText} from '../content/starlit.md';
 import { Content as SkillsText } from '../content/skills.mdx';
 import { Content as ContactText } from '../content/contact.md';
 ---
@@ -19,7 +20,7 @@ import { Content as ContactText } from '../content/contact.md';
     </section>
     <section class="hero-asciinema-starlit">
       <AsciinemaDemo client:visible src="/recordings/starlit.cast" title="Starlit demo" autoplay="true" loop="true" controls="false" />
-  
+      <StarlitText />
     </section>
   </section>
   <section id="projects" class="projects">
@@ -89,6 +90,7 @@ import { Content as ContactText } from '../content/contact.md';
   order: 2;
   align-self: stretch;
   flex: 1;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   display: flex;
