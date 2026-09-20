@@ -15,6 +15,7 @@ export const skills: Record<string, Skill[]> = {
     { name: 'Golang', used: [p('Pyxis')] },
     { name: 'Dart', used: ['Campus Assignments'] },
     { name: 'Nix', used: [p('Atelier-Iris')] },
+    { name: 'SQL', used: [p('Horologium'), p('Pyxis'), 'Campus Job', 'Campus Assignments'] }
   ],
   Frameworks: [
     { name: '.NET', used: ['Campus Job Training'] },
