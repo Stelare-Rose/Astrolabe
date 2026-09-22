@@ -2,4 +2,4 @@ Hello, I'm Stelare (pseudonym, obviously), a software developer, occasional comp
 
 My current interests are Rust and Nix, and you'll find me working on Local-first software (bad internet forced my hand). I also often do random studies on random techniques I intend to use.
 
-> Currently poking at: NixOS Configurations, Packaging, and Flakes.
+> Currently poking at: Rewriting [[proj!Pyxis]], and learning how to make Web-based games.
