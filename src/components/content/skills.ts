@@ -15,7 +15,7 @@ export const skills: Record<string, Skill[]> = {
     { name: 'Golang', used: [p('Pyxis')] },
     { name: 'Dart', used: ['Campus Assignments'] },
     { name: 'Nix', used: [p('Atelier-Iris')] },
-    { name: 'SQL', used: [p('Horologium'), p('Pyxis'), 'Campus Job', 'Campus Assignments'] }
+    { name: 'SQL', used: [p('Horologium'), p('Pyxis'), 'Campus Job Training', 'Campus Assignments', 'Freelance Work'] }
   ],
   Frameworks: [
     { name: '.NET', used: ['Campus Job Training'] },
@@ -26,9 +26,13 @@ export const skills: Record<string, Skill[]> = {
     { name: 'Astro', used: [('This Website')] },
   ],
   Tools: [
-    { name: 'Git', used: [] },
-    { name: 'Nix Devshells', used: [] },
-    { name: 'Systemd', used: [] },
+    { name: 'Git', used: ['tbh everything like even my minecraft is synced with git'] },
+    { name: 'SQLite', used: [p('Horologium'), p('Pyxis')] },
+    { name: 'Postgres', used: ['Campus Assignments', 'Freelance Work'] },
+    { name: 'Cloudflare Tunnels', used: [p('Homelab')] },
+    { name: 'Vercel', used: ['Campus Assignments'] },
+    { name: 'NixOS', used: [p('Atelier-Iris')] },
+    { name: 'Systemd', used: [p('Homelab'), p('Atelier-Iris')] },
     { name: 'Neovim', used: [('obviously :P')] },
   ],
 };
