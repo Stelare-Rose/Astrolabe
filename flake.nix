@@ -17,6 +17,7 @@
         name="Astrolabe";
         packages = with pkgs; [
           bun
+          nodejs
           svelte-language-server
           astro-language-server
           emmet-language-server
