@@ -19,6 +19,7 @@ export const skills: Record<string, Skill[]> = {
   ],
   Frameworks: [
     { name: '.NET', used: ['Campus Job Training'] },
+    { name: 'React', used: ['Campus Job Training'] },
     { name: 'React Native', used: ['Campus Job'] },
     { name: 'Flutter', used: ['Campus Assignments'] },
     { name: 'Nuxt', used: [p('Pyxis')] },
@@ -33,6 +34,7 @@ export const skills: Record<string, Skill[]> = {
     { name: 'Vercel', used: ['Campus Assignments'] },
     { name: 'NixOS', used: [p('Atelier-Iris')] },
     { name: 'Systemd', used: [p('Homelab'), p('Atelier-Iris')] },
+    { name: 'Docker', used: [p('Homelab')] },
     { name: 'Neovim', used: [('obviously :P')] },
   ],
 };
