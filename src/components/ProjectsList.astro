@@ -5,9 +5,15 @@ import ProjectCard from './ProjectCard.astro';
 
 const projects = await getCollection('projects');
 
-const sorted = [...projects].sort(
-  (a, b) => (a.data.order ?? 0) - (b.data.order ?? 0)
-);
+const sorted = [...projects].sort((a, b) => {
+  const ao = a.data.order;
+  const bo = b.data.order;
+
+  if (ao == null && bo == null) return 0;
+  if (ao == null) return 1;
+  if (bo == null) return -1;  
+  return ao - bo;
+});
 
 const rendered = await Promise.all(
   sorted.map(async (entry) => ({
@@ -212,11 +218,12 @@ const FADE_MS = 200;
 
 function showProject(id: string) {
   const root = document.querySelector<HTMLElement>('.projects-master-detail');
+  if (!root) return;
+
   root.querySelector('.project-detail')?.scrollIntoView({
     behavior: 'smooth',
     block: 'nearest',
   });
-  if (!root) return;
 
   const buttons = Array.from(
     root.querySelectorAll<HTMLButtonElement>('[data-project-id]')
