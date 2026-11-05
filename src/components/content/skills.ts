@@ -13,8 +13,9 @@ export const skills: Record<string, Skill[]> = {
     { name: 'TypeScript', used: [p('Pyxis'), 'Campus Job'] },
     { name: 'Rust', used: [p('Starlit'), p('Eridanus'), p('Horologium')] },
     { name: 'Golang', used: [p('Pyxis')] },
+    { name: 'Java', used: [p('Board')] },
     { name: 'Dart', used: ['Campus Assignments'] },
-    { name: 'Nix', used: [p('Atelier-Iris')] },
+    { name: 'Nix', used: [p('Atelier-Iris'), p('Board')] },
     { name: 'SQL', used: [p('Horologium'), p('Pyxis'), 'Campus Job Training', 'Campus Assignments', 'Freelance Work'] }
   ],
   Frameworks: [
@@ -23,6 +24,7 @@ export const skills: Record<string, Skill[]> = {
     { name: 'React Native', used: ['Campus Job'] },
     { name: 'Flutter', used: ['Campus Assignments'] },
     { name: 'Nuxt', used: [p('Pyxis')] },
+    { name: 'Spring Boot', used: [p('Board')] },
     { name: 'Svelte', used: [('This Website')] },
     { name: 'Astro', used: [('This Website')] },
   ],
@@ -34,7 +36,8 @@ export const skills: Record<string, Skill[]> = {
     { name: 'Vercel', used: ['Campus Assignments'] },
     { name: 'NixOS', used: [p('Atelier-Iris')] },
     { name: 'Systemd', used: [p('Homelab'), p('Atelier-Iris')] },
-    { name: 'Docker', used: [p('Homelab')] },
+    { name: 'Docker', used: [p('Homelab'), p('Board')] },
+    { name: 'k3s', used: [p('Board')] },
     { name: 'Neovim', used: [('obviously :P')] },
   ],
 };
