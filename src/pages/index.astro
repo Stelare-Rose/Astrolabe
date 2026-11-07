@@ -2,7 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import Topbar from '../components/Topbar.astro';
 import Pill from '../components/Pill.astro';
+import Divider from '../components/Divider.astro';
 import ProjectsList from '../components/ProjectsList.astro';
+import LatestPost from '../components/LatestPost.astro';
 import '../styles/global.css';
 import 'asciinema-player/dist/bundle/asciinema-player.css';
 import AsciinemaDemo from '../components/AsciinemaDemo.svelte';
@@ -23,6 +25,7 @@ import { Content as ContactText } from '../content/contact.md';
       <StarlitText />
     </section>
   </section>
+  <Divider />
   <section id="projects" class="projects">
     <h1>Projects</h1>
     <blockquote>
@@ -51,10 +54,16 @@ import { Content as ContactText } from '../content/contact.md';
     </blockquote>
     <ProjectsList />
   </section>
+  <Divider />
   <section id="skills" class="skills">
     <h1>Skills</h1>
     <SkillsText />
   </section>
+  <Divider />
+  <section id="latest-posts">
+    <LatestPost />
+  </section>
+  <Divider />
   <section id="contact" class="contact">
     <ContactText />
   </section>
@@ -64,7 +73,6 @@ import { Content as ContactText } from '../content/contact.md';
 .hero {
   min-height: 50vh;
   display: flex;
-  padding: 2rem;
   justify-content: space-between;
   flex-wrap: wrap;
   column-gap: 8rem;
@@ -100,10 +108,6 @@ import { Content as ContactText } from '../content/contact.md';
   width: 100%;
 }
 
-.projects {
-  padding: 2rem;
-}
-
 .projects-legend {
   display: flex;
   flex-direction: column;
@@ -118,14 +122,6 @@ import { Content as ContactText } from '../content/contact.md';
   gap: 0.6rem;
   font-size: 0.9rem;
   color: var(--subtext);
-}
-
-.skills {
-  padding: 2rem;
-}
-
-.contact {
-  padding: 2rem;
 }
 
 </style>

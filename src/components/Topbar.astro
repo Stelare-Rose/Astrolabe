@@ -8,14 +8,15 @@ const sections = [
 ---
 <nav class="topbar">
   <section class="topbar-right">
-    <a href="#about">
+    <a href="/#about">
       <img src="/icons/icon.svg" alt="Site logo" width="48" height="48" />
     </a>
   </section>
   <section class="topbar-left">
     {sections.map(s => (
-    <a href={`#${s.id}`}>{s.label}</a>
+    <a href={`/#${s.id}`}>{s.label}</a>
     ))}
+    <a href="/blog">Blog</a>
 <button style="font-family: MonaspiceNe Nerd Font Mono, monospace" id="flavor-toggle" aria-label="Toggle flavor"></button>
   </section>
 </nav>

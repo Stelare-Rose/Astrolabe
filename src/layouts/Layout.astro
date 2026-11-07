@@ -29,11 +29,27 @@ const { title = "Astrolabe" } = Astro.props;
       document.documentElement.setAttribute('data-flavor', saved);
     </script>
   </head>
-  <body>
-    <Topbar />
-    <main>
-      <slot />
-    </main>
+  <body class="everything">
+    <section class="everything-but-footer">
+      <Topbar />
+      <main class="container">
+        <slot />
+      </main>
+    </section>
     <Footer />
   </body>
+  <style>
+  .everything {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+  }
+  .everything-but-footer {
+    flex: 1;
+  }
+  .container {
+    padding: 2rem;
+  }
+  </style>
 </html>

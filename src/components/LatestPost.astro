@@ -1,0 +1,76 @@
+---
+import { getCollection } from 'astro:content';
+import { tagColor } from '../utils/tagColor';
+import Pill from './Pill.astro';
+
+const [latest] = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publish.valueOf() - a.data.publish.valueOf());
+
+const fmt = (d: Date) => d.toLocaleDateString('en-GB', { dateStyle: 'long' });
+---
+
+{latest && (
+  <section class="latest-post" aria-labelledby="latest-post-heading">
+    <div class="latest-post-header">
+      <h1 id="latest-post-heading">Blog (Most Recent)</h1>
+      <a class="latest-post-all" href="/blog/">All posts →</a>
+    </div>
+
+    <a class="latest-post-card" href={`/blog/${latest.id}/`}>
+      <time datetime={latest.data.publish.toISOString()}>{fmt(latest.data.publish)}</time>
+      <h3>{latest.data.title}</h3>
+      <p>{latest.data.description}</p>
+      <span class="latest-post-tags">
+        {latest.data.topics.map((t) => <Pill text={t} color={tagColor(t)} />)}
+      </span>
+      <span class="latest-post-read">Read post →</span>
+    </a>
+  </section>
+)}
+
+<style>
+.latest-post { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.latest-post-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.latest-post-header h2 { margin: 0; }
+.latest-post-all { font-size: 0.9rem; text-decoration: none; }
+.latest-post-all:hover { text-decoration: underline; }
+
+.latest-post-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  background: var(--bg-alt);
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.latest-post-card:hover,
+.latest-post-card:focus-visible {
+  background: var(--surface);
+  border-color: var(--accent, var(--ink));
+}
+.latest-post-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.latest-post-card time { font-size: 0.85rem; color: var(--subtext); }
+.latest-post-card h3 { margin: 0; font-size: 1.3rem; color: var(--ink); }
+.latest-post-card p { margin: 0.2rem 0 0.4rem; line-height: 1.6; }
+
+.latest-post-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+
+.latest-post-read {
+  margin-top: 0.4rem;
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  color: var(--accent);
+}
+.latest-post-card:hover .latest-post-read { text-decoration: underline; }
+</style>

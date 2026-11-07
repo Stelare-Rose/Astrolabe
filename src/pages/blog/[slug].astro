@@ -1,0 +1,73 @@
+---
+import { getCollection, render } from 'astro:content';
+import { tagColor } from '../../utils/tagColor';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+---
+<Layout name={post.data.title}>
+  <article>
+    <header>
+      <h1>{post.data.title}</h1>
+      <p>{post.data.description}</p>
+      <time datetime={post.data.publish.toISOString()}>
+        {post.data.publish.toLocaleDateString('en-GB', { dateStyle: 'long' })}
+      </time>
+      <ul class="topics">
+        {post.data.topics.map((t) => <li style={`--tag-color:${tagColor(t)}`}>{t}</li>)}
+      </ul>
+    </header>
+    <Content />
+  </article>
+</Layout>
+<style is:global>
+article { max-width: 80ch; margin: 0 auto; line-height: 1.75; }
+article header { margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1.25rem; }
+article header p { color: var(--ink-soft); }
+article time { color: var(--subtext); font-size: .9rem; }
+article .topics { display: flex; gap: .5rem; list-style: none; padding: 0; }
+article .topics li {
+    --tag-color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25em 0.75em;
+    border-radius: 999px;
+    font-size: 0.85em;
+    line-height: 1.4;
+    font-weight: 500;
+    white-space: nowrap;
+    font-family: var(--font-heading);
+    font-style: normal;
+    color: var(--tag-color);
+    background-color: color-mix(in srgb, var(--tag-color) 10%, transparent);
+    border: 1px dashed var(--tag-color);
+  }
+}
+
+article pre.astro-code {
+  margin-inline: -4ch;
+}
+@media (max-width: 80ch) {
+  article pre.astro-code { margin-inline: 0; }
+}
+
+article :not(pre) > code {
+  font-family: 'MonaspiceNe Nerd Font Mono', ui-monospace, monospace;
+  background: var(--surface);
+  padding: .1em .35em;
+  border-radius: 6px;
+  font-size: .9em;
+}
+article li > ul, article li > p { margin: .25rem 0; }
+
+/* Footnotes */
+article sup a { text-decoration: none; font-weight: 600; }
+article .footnotes { margin-top: 3rem; padding-top: 1rem; border-top: 1px dashed var(--border); font-size: .9rem; color: var(--subtext); }
+article .footnotes h2 { font-size: 1rem; }
+</style>

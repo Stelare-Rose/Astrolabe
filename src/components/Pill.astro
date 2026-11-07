@@ -1,5 +1,4 @@
 ---
-// Pill.astro
 interface Props {
   text: string;
   color?: string;
@@ -29,10 +28,11 @@ const { text, color, class: className } = Astro.props;
     line-height: 1.4;
     font-weight: 500;
     white-space: nowrap;
+    font-family: var(--font-heading);
     font-style: normal;
 
     color: var(--pill-color);
-    background-color: color-mix(in srgb, var(--pill-color) 15%, transparent);
+    background-color: color-mix(in srgb, var(--pill-color) 10%, transparent);
     border: 1px dashed var(--pill-color);
   }
 </style>
