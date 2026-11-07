@@ -23,13 +23,13 @@ Additionally, I often find that sometimes these tools don't work offline- they c
 Other than those, it's always a nice little learning opportunity when you notice that software you've been using isn't really satisfactory, so that's really where this all started.
 ## My design constraints
 Based on my needs, I devised a few design constraints (or requirements, depending on your taste) that I wanted to be able to fulfill. Namely,
-- Local-first
+- **Local-first**  
 	As mentioned, spotty internet issues are unacceptable to me, and I want to be able to record my time without connection to the internet at all.
-- Standalone
+- **Standalone**  
 	Because I'm a student without the resources to blow on a vps, each instance of the application should be standalone, not requiring a server or another instance to function.
-- Human-readable Data
+- **Human-readable Data**  
 	I'm sure this one seems to come out of nowhere, but the above two constraints allow me to add this in with the express goal of easier debugging and also being able to check the data even if my application breaks.
-- Fast Common Loop
+- **Fast Common Loop**  
 	Since I want to record things on the go, ideally I thought that the action of recording should be as fast as possible, with as few actions needed by me as possible.
 These constraints were what I defined at the start of the project, albeit with the expectation that I would have to be open to compromising on one or two of these.
 ## The problem
@@ -58,14 +58,14 @@ At that point, I arrived at the following line of thought to build my current da
 6. Since all states can be represented as adjacent events, we can always find the "end" of an event given the "start" of the next one.
 And such, since the "end" is implied, we never actually have to "stop" the previous event when we start the next event. And as such, by simply deriving the "end" of events from the start times of the previously adjacent event, we've decoupled the events from history, turning them not history-dependent.
 ## Tradeoffs, and what this actually is useful for
-So my approach to this does have a few tradeoffs. These are things that I personally deem acceptable but make this approach less than ideal for most cases. Namely,
-- No Parallel Events
+So my approach to this does have a few tradeoffs. These are things that I personally deem acceptable but make this approach less than ideal for most cases. Namely,
+- **No Parallel Events**  
 	This one is key to the insight, but you can't track multiple events at once. This approach assumes that you're only doing one thing at a time.
-- More Computationally Expensive
+- **More Computationally Expensive**  
 	Since the truth needs to be derived and transformed, more computation cost is required to get this all working. Though this will be something I explore in later blog entries through my decisions in cache design.
-- Development Difficulty
-	Due to the nature of just how the application is structured, the development is a bit harder compared to your traditional application since you don't have a central database to use as the source of truth, so a lot of attention needs to be placed in how you package each event to ensure they don't conflict when merged.
-- Still Technically Not Entirely Conflict-proof
+- **Development Difficulty**  
+	Due to the nature of just how the application is structured, the development is a bit harder compared to your traditional application since you don't have a central database to use as the source of truth, so a lot of attention needs to be placed in how you package each event to ensure they don't conflict when merged. Stay tuned, and this post will be updated when the time comes for me to discuss caching.
+- **Still Technically Not Entirely Conflict-proof**  
 	Although this approach solves the idea of conflicts in the common case of "adding a new event", this doesn't actually solve the case of editing events, settings, or even additional fluff like tags or project definitions. In these cases, conflicts can still happen, and mitigation requires more exploration
 So this approach really is only useful for my own specific use case- something that's single-tracking and I can afford the computational cost, and the difficulty in development just means I need to learn more. But I think in a way that's a part of what I find interesting about working on projects like these- it's that you get to converge on a solution that's somewhat overkill to a problem that you have, and you get to learn from it.
 
