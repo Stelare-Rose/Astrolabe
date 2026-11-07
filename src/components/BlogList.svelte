@@ -155,7 +155,6 @@
     padding: 1.25rem 1.5rem;
   }
   .posts > li:hover { border-color: var(--accent); }
-  .posts a { text-decoration: none; }
   .posts h2 { margin: 0 0 .25rem; font-size: 1.35rem; color: var(--ink); }
   .posts time { color: var(--subtext); font-size: .85rem; }
   .posts p { color: var(--ink-soft); margin: .6rem 0 .8rem; line-height: 1.6; }
