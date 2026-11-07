@@ -21,9 +21,23 @@ const tagIndex = [...counts]
 ---
 <Layout name="Astrolabe, The Blog">
   <main>
-    <h1>Blog</h1>
+    <section class="title">
+      <h1>Astrolabe, The Blog</h1>
+      <span class="subtitle">Fun fact: Astrolabe was originally the name for the blog, not the whole personal website. Alas, naming things is one of the hard things in Computer Science.</span>
+    </section>
     <BlogList client:load {posts} {tagIndex} />
   </main>
 </Layout>
-
+<style>
+  h1 {
+    margin-bottom: 0.5rem;
+  }
+  .title {
+    margin-bottom: 2rem;
+  }
+  .subtitle {
+    color: var(--ink-soft);
+    opacity: 0.7;
+  }
+</style>
 
