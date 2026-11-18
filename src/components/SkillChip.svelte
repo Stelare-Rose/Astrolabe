@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { computePosition, flip, shift, offset } from '@floating-ui/dom';
-  import { activeTooltip } from './activeTooltip';
+  import { computePosition, flip, shift, offset } from "@floating-ui/dom";
+  import { activeTooltip } from "./activeTooltip";
 
   type Use = string | { project: string; label: string };
 
@@ -16,8 +16,8 @@
   async function place() {
     if (!chip || !tip) return;
     const { x, y } = await computePosition(chip, tip, {
-      placement: 'top',
-      strategy: 'fixed',
+      placement: "top",
+      strategy: "fixed",
       middleware: [offset(6), flip(), shift({ padding: 8 })],
     });
     Object.assign(tip.style, { left: `${x}px`, top: `${y}px` });
@@ -40,27 +40,27 @@
 
   function go(id: string) {
     activeTooltip.set(null);
-    window.dispatchEvent(new CustomEvent('show-project', { detail: id }));
+    window.dispatchEvent(new CustomEvent("show-project", { detail: id }));
   }
 
   function onKeydown(e: KeyboardEvent) {
-    if (e.key === 'Escape') activeTooltip.set(null);
+    if (e.key === "Escape") activeTooltip.set(null);
   }
 
   // Attach hover/focus listeners without triggering a11y lint on non-interactive nodes
   function hoverZone(node: HTMLElement) {
-    node.addEventListener('mouseenter', show);
-    node.addEventListener('mouseleave', hide);
-    node.addEventListener('focusin', show);
-    node.addEventListener('focusout', hide);
-    node.addEventListener('keydown', onKeydown);
+    node.addEventListener("mouseenter", show);
+    node.addEventListener("mouseleave", hide);
+    node.addEventListener("focusin", show);
+    node.addEventListener("focusout", hide);
+    node.addEventListener("keydown", onKeydown);
     return {
       destroy() {
-        node.removeEventListener('mouseenter', show);
-        node.removeEventListener('mouseleave', hide);
-        node.removeEventListener('focusin', show);
-        node.removeEventListener('focusout', hide);
-        node.removeEventListener('keydown', onKeydown);
+        node.removeEventListener("mouseenter", show);
+        node.removeEventListener("mouseleave", hide);
+        node.removeEventListener("focusin", show);
+        node.removeEventListener("focusout", hide);
+        node.removeEventListener("keydown", onKeydown);
       },
     };
   }
@@ -80,10 +80,14 @@
     {#if used.length}
       <span bind:this={tip} role="tooltip" class="tip" class:open>
         {#each used as u}
-          {#if typeof u === 'string'}
+          {#if typeof u === "string"}
             <span class="tip-text">{u}</span>
           {:else}
-            <button type="button" class="tip-link" on:click={() => go(u.project)}>
+            <button
+              type="button"
+              class="tip-link"
+              on:click={() => go(u.project)}
+            >
               {u.label}
             </button>
           {/if}
@@ -115,7 +119,7 @@
 
   .chip:hover,
   .chip:focus-visible {
-    background: var(--surface);
+    background: var(--bg);
   }
 
   .tip {
@@ -135,7 +139,9 @@
     font-size: 0.85em;
     visibility: hidden;
     opacity: 0;
-    transition: opacity 0.15s ease, visibility 0.15s;
+    transition:
+      opacity 0.15s ease,
+      visibility 0.15s;
   }
 
   .tip.open {
@@ -146,14 +152,18 @@
   /* invisible bridges so the pointer can cross the gap in either direction */
   .tip::before,
   .tip::after {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     right: 0;
     height: 0.5rem;
   }
-  .tip::before { bottom: 100%; }
-  .tip::after { top: 100%; }
+  .tip::before {
+    bottom: 100%;
+  }
+  .tip::after {
+    top: 100%;
+  }
 
   .tip-text {
     color: var(--ink-soft);
